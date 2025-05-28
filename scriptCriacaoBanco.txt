@@ -1,0 +1,24 @@
+CREATE TABLE clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    nascimento TIMESTAMP,
+    telefone VARCHAR(20),
+    documento VARCHAR(20) NOT NULL,
+    criado_em TIMESTAMP NOT NULL,
+    alterado_em TIMESTAMP NOT NULL
+);
+---
+
+CREATE TABLE enderecos (
+    id SERIAL PRIMARY KEY,
+    cep INTEGER NOT NULL,
+    logradouro VARCHAR(255) NOT NULL,
+    numero VARCHAR(20) NOT NULL,
+    complemento VARCHAR(255),
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(255) NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    cliente_id INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 1,
+    CONSTRAINT fk_enderecos_clientes FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE
+);
